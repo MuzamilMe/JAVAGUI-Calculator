@@ -38,7 +38,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
      */
     public CalculatorGUI() throws FontFormatException, IOException {
         initComponents();   
-         font = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/java/fonts/digital-7.ttf")).deriveFont(40f);
+         font = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/java/fonts/digital-7.ttf")).deriveFont(30f);
 //         text1 = new JTextField(); 
          text1.setFont(font);
             on.setSelected(true);
@@ -137,16 +137,17 @@ public class CalculatorGUI extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        history.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        history.setForeground(java.awt.Color.white);
+        history.setBackground(new java.awt.Color(218, 200, 170));
+        history.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        history.setForeground(java.awt.Color.darkGray);
         history.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        history.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(255, 255, 255)));
+        history.setBorder(null);
         history.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 historyActionPerformed(evt);
             }
         });
-        jPanel2.add(history, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 117, -1));
+        jPanel2.add(history, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 120, 20));
 
         jLabel3.setFont(new java.awt.Font("MV Boli", 0, 18)); // NOI18N
         jLabel3.setText("Standard");
@@ -459,7 +460,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
                 text1ActionPerformed(evt);
             }
         });
-        jPanel2.add(text1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 238, 63));
+        jPanel2.add(text1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 73, 238, 70));
 
         on.setText("ON");
         on.addActionListener(new java.awt.event.ActionListener() {
@@ -515,7 +516,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
                 DecimalFormat decimalFormat = new DecimalFormat("#.#####");
                          text1.setText(result % 1 == 0 ? String.valueOf(result.intValue()) : decimalFormat.format(result));
                          history.setVisible(true);
-                         history.setBackground(Color.BLUE);
+//                         history.setBackground(Color.BLUE);
             String no1 = num1 % 1 == 0 ? String.valueOf(num1.intValue()) : decimalFormat.format(num1);
             String no2 = num2 % 1 == 0 ? String.valueOf(num2.intValue()) : decimalFormat.format(num2);
             history.setText(no1+op+no2);                        
@@ -539,6 +540,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     private void jButtonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearActionPerformed
         // TODO add your handling code here:
         text1.setText("");
+        history.setText("");
     }//GEN-LAST:event_jButtonClearActionPerformed
 
     private void jButtonDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDelActionPerformed
@@ -673,6 +675,8 @@ public class CalculatorGUI extends javax.swing.JFrame {
                 jButtonDot.setEnabled(true);
                 jButtoneq.setEnabled(true);
                 jLabel3.setEnabled(true);
+                history.setEnabled(true);
+
                 t.start();
 
 
@@ -708,11 +712,12 @@ public class CalculatorGUI extends javax.swing.JFrame {
                 jButtonDot.setEnabled(false);
                 jButtoneq.setEnabled(false);
                 history.setText("");
-                history.setBackground(Color.WHITE);
+                history.setEnabled(false);
                 text1.setText("");
                 jLabel3.setEnabled(false);
                 timeLabel.setText("");
                 t.stop();
+                
                
 
 
