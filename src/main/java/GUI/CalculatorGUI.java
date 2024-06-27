@@ -4,8 +4,19 @@
  */
 package GUI;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.Timer;
 
 /**
@@ -16,7 +27,8 @@ public class CalculatorGUI extends javax.swing.JFrame {
      Double num1,num2;
      String op = null;
      Double result;
-
+     Timer t;
+     
     /**
      * Creates new form CalculatorGUI
      */
@@ -24,7 +36,6 @@ public class CalculatorGUI extends javax.swing.JFrame {
         initComponents();   
             on.setSelected(true);
             on.setEnabled(false);
-
             String oldText = text1.getText();
             text1.setText("Welcome");
             Timer timer = new Timer(1000, event -> {
@@ -32,9 +43,33 @@ public class CalculatorGUI extends javax.swing.JFrame {
             });
             timer.setRepeats(false);
             timer.start();
-            
 
+        // Use a Timer to update the time every second
+         t = new Timer(1000, e -> {
+            try {
+                updateTime();
+            } catch (FontFormatException ex) {
+                Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+         t.start();
+            
+           
     }
+    private void updateTime() throws FontFormatException, IOException {
+        Font digitalClockFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/java/fonts/digital-7.ttf")).deriveFont(40f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(digitalClockFont);
+            timeLabel.setFont(digitalClockFont);
+        GregorianCalendar gcalendar = new GregorianCalendar();
+        String hr = String.format("%02d:", gcalendar.get(Calendar.HOUR));
+        String min = String.format("%02d:", gcalendar.get(Calendar.MINUTE));
+        String sec = String.format("%02d", gcalendar.get(Calendar.SECOND));
+        timeLabel.setText(hr + min + sec);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -79,6 +114,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         text1 = new javax.swing.JTextField();
         on = new javax.swing.JRadioButton();
         off = new javax.swing.JRadioButton();
+        timeLabel = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
@@ -103,11 +139,11 @@ public class CalculatorGUI extends javax.swing.JFrame {
                 historyActionPerformed(evt);
             }
         });
-        jPanel2.add(history, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 24, 117, -1));
+        jPanel2.add(history, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 117, -1));
 
         jLabel3.setFont(new java.awt.Font("MV Boli", 0, 18)); // NOI18N
         jLabel3.setText("Standard");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 90, 40));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 90, 40));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -322,7 +358,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -407,18 +443,18 @@ public class CalculatorGUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 119, -1, -1));
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
 
         text1.setBackground(new java.awt.Color(218, 200, 170));
         text1.setFont(new java.awt.Font("Stencil", 0, 18)); // NOI18N
         text1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        text1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 8));
+        text1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 152, 35), 8));
         text1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 text1ActionPerformed(evt);
             }
         });
-        jPanel2.add(text1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 238, 63));
+        jPanel2.add(text1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 238, 63));
 
         on.setText("ON");
         on.addActionListener(new java.awt.event.ActionListener() {
@@ -435,6 +471,10 @@ public class CalculatorGUI extends javax.swing.JFrame {
             }
         });
         jPanel2.add(off, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 50, -1));
+
+        timeLabel.setFont(new java.awt.Font("Courier New", 0, 18)); // NOI18N
+        timeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(timeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 200, 30));
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_END);
 
@@ -626,6 +666,9 @@ public class CalculatorGUI extends javax.swing.JFrame {
                 jButtonPercent.setEnabled(true);
                 jButtonDot.setEnabled(true);
                 jButtoneq.setEnabled(true);
+                jLabel3.setEnabled(true);
+                t.start();
+
 
 
 
@@ -661,6 +704,11 @@ public class CalculatorGUI extends javax.swing.JFrame {
                 history.setText("");
                 history.setBackground(Color.WHITE);
                 text1.setText("");
+                jLabel3.setEnabled(false);
+                timeLabel.setText("");
+                t.stop();
+               
+
 
 
 
@@ -738,5 +786,6 @@ public class CalculatorGUI extends javax.swing.JFrame {
     private javax.swing.JRadioButton off;
     private javax.swing.JRadioButton on;
     private javax.swing.JTextField text1;
+    private javax.swing.JLabel timeLabel;
     // End of variables declaration//GEN-END:variables
 }
