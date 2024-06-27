@@ -17,6 +17,7 @@ import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 
 /**
@@ -28,12 +29,18 @@ public class CalculatorGUI extends javax.swing.JFrame {
      String op = null;
      Double result;
      Timer t;
+     public Font font;
      
     /**
      * Creates new form CalculatorGUI
+     * @throws java.awt.FontFormatException
+     * @throws java.io.IOException
      */
-    public CalculatorGUI() {
+    public CalculatorGUI() throws FontFormatException, IOException {
         initComponents();   
+         font = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/java/fonts/digital-7.ttf")).deriveFont(40f);
+//         text1 = new JTextField(); 
+         text1.setFont(font);
             on.setSelected(true);
             on.setEnabled(false);
             String oldText = text1.getText();
@@ -406,9 +413,8 @@ public class CalculatorGUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButtonClear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonDel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+                    .addComponent(jButtonClear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonDel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonPercent, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonDiv, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -446,7 +452,6 @@ public class CalculatorGUI extends javax.swing.JFrame {
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
 
         text1.setBackground(new java.awt.Color(218, 200, 170));
-        text1.setFont(new java.awt.Font("Stencil", 0, 18)); // NOI18N
         text1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 152, 35), 8));
         text1.addActionListener(new java.awt.event.ActionListener() {
@@ -473,6 +478,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         jPanel2.add(off, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 50, -1));
 
         timeLabel.setFont(new java.awt.Font("Courier New", 0, 18)); // NOI18N
+        timeLabel.setForeground(new java.awt.Color(204, 0, 51));
         timeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel2.add(timeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 200, 30));
 
@@ -746,7 +752,13 @@ public class CalculatorGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CalculatorGUI().setVisible(true);
+                try {
+                    new CalculatorGUI().setVisible(true);
+                } catch (FontFormatException ex) {
+                    Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
