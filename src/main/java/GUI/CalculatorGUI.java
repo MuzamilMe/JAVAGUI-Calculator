@@ -4,8 +4,6 @@
  */
 package GUI;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
@@ -16,8 +14,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.Timer;
 
 /**
@@ -25,34 +21,36 @@ import javax.swing.Timer;
  * @author Muzamil-M
  */
 public class CalculatorGUI extends javax.swing.JFrame {
-     Double num1,num2;
-     String op = null;
-     Double result;
-     Timer t;
-     public Font font;
-     
+
+    Double num1, num2;
+    String op = null;
+    Double result;
+    Timer t;
+    public Font font;
+
     /**
      * Creates new form CalculatorGUI
+     *
      * @throws java.awt.FontFormatException
      * @throws java.io.IOException
      */
     public CalculatorGUI() throws FontFormatException, IOException {
-        initComponents();   
-         font = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/java/fonts/digital-7.ttf")).deriveFont(30f);
+        initComponents();
+        font = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/java/fonts/digital-7.ttf")).deriveFont(30f);
 //         text1 = new JTextField(); 
-         text1.setFont(font);
-            on.setSelected(true);
-            on.setEnabled(false);
-            String oldText = text1.getText();
-            text1.setText("Welcome");
-            Timer timer = new Timer(1000, event -> {
-                text1.setText(oldText);
-            });
-            timer.setRepeats(false);
-            timer.start();
+        text1.setFont(font);
+        on.setSelected(true);
+        on.setEnabled(false);
+        String oldText = text1.getText();
+        text1.setText("Welcome");
+        Timer timer = new Timer(1000, event -> {
+            text1.setText(oldText);
+        });
+        timer.setRepeats(false);
+        timer.start();
 
         // Use a Timer to update the time every second
-         t = new Timer(1000, e -> {
+        t = new Timer(1000, e -> {
             try {
                 updateTime();
             } catch (FontFormatException ex) {
@@ -61,22 +59,21 @@ public class CalculatorGUI extends javax.swing.JFrame {
                 Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-         t.start();
-            
-           
+        t.start();
+
     }
+
     private void updateTime() throws FontFormatException, IOException {
         Font digitalClockFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/java/fonts/digital-7.ttf")).deriveFont(40f);
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(digitalClockFont);
-            timeLabel.setFont(digitalClockFont);
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        ge.registerFont(digitalClockFont);
+        timeLabel.setFont(digitalClockFont);
         GregorianCalendar gcalendar = new GregorianCalendar();
         String hr = String.format("%02d:", gcalendar.get(Calendar.HOUR));
         String min = String.format("%02d:", gcalendar.get(Calendar.MINUTE));
         String sec = String.format("%02d", gcalendar.get(Calendar.SECOND));
         timeLabel.setText(hr + min + sec);
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -93,10 +90,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
         buttonGroup4 = new javax.swing.ButtonGroup();
-        jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
-        history = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
@@ -118,6 +112,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         jButtoneq = new javax.swing.JButton();
         jButtonDel = new javax.swing.JButton();
         jButtonPercent = new javax.swing.JButton();
+        history = new javax.swing.JTextField();
         text1 = new javax.swing.JTextField();
         on = new javax.swing.JRadioButton();
         off = new javax.swing.JRadioButton();
@@ -131,23 +126,9 @@ public class CalculatorGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Calculator");
         setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jSeparator1, java.awt.BorderLayout.CENTER);
-        getContentPane().add(jSeparator2, java.awt.BorderLayout.PAGE_START);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        history.setBackground(new java.awt.Color(218, 200, 170));
-        history.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        history.setForeground(java.awt.Color.darkGray);
-        history.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        history.setBorder(null);
-        history.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                historyActionPerformed(evt);
-            }
-        });
-        jPanel2.add(history, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 120, 20));
 
         jLabel3.setFont(new java.awt.Font("MV Boli", 0, 18)); // NOI18N
         jLabel3.setText("Standard");
@@ -452,6 +433,18 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
 
+        history.setBackground(new java.awt.Color(218, 200, 170));
+        history.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        history.setForeground(java.awt.Color.darkGray);
+        history.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        history.setBorder(null);
+        history.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                historyActionPerformed(evt);
+            }
+        });
+        jPanel2.add(history, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 120, 20));
+
         text1.setBackground(new java.awt.Color(218, 200, 170));
         text1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         text1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 152, 35), 8));
@@ -461,6 +454,8 @@ public class CalculatorGUI extends javax.swing.JFrame {
             }
         });
         jPanel2.add(text1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 73, 238, 70));
+        text1.getAccessibleContext().setAccessibleName("");
+        text1.getAccessibleContext().setAccessibleDescription("");
 
         on.setText("ON");
         on.addActionListener(new java.awt.event.ActionListener() {
@@ -483,58 +478,57 @@ public class CalculatorGUI extends javax.swing.JFrame {
         timeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel2.add(timeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 200, 30));
 
-        getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_END);
+        getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-                text1.setText(text1.getText()+"8");
+        text1.setText(text1.getText() + "8");
 
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButtoneqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoneqActionPerformed
         // TODO add your handling code here:
-        num2 = Double.parseDouble(text1.getText());
-        if(op.equals("/")){
-            result = num1/num2;
-        }  
-         if(op.equals("*")){
-            result = num1*num2;
-        }  
-          if(op.equals("+")){
-            result = num1+num2;
-        }  
-           if(op.equals("-")){
-            result = num1-num2;
-        }  
-            if(op.equals("%")){
-            result = num1%num2;
-        }  
-            if(result!=null){
-                DecimalFormat decimalFormat = new DecimalFormat("#.#####");
-                         text1.setText(result % 1 == 0 ? String.valueOf(result.intValue()) : decimalFormat.format(result));
-                         history.setVisible(true);
-//                         history.setBackground(Color.BLUE);
+        if(text1.getText().isBlank() == false && num1!=null){
+        num2 = Double.valueOf(text1.getText());
+        if (op.equals("/")) {
+            result = num1 / num2;
+        }
+        if (op.equals("*")) {
+            result = num1 * num2;
+        }
+        if (op.equals("+")) {
+            result = num1 + num2;
+        }
+        if (op.equals("-")) {
+            result = num1 - num2;
+        }
+        if (op.equals("%")) {
+            result = num1 % num2;
+        }
+        if (result != null) {
+            DecimalFormat decimalFormat = new DecimalFormat("#.#####");
+            text1.setText(result % 1 == 0 ? String.valueOf(result.intValue()) : decimalFormat.format(result));
+            history.setVisible(true);
             String no1 = num1 % 1 == 0 ? String.valueOf(num1.intValue()) : decimalFormat.format(num1);
             String no2 = num2 % 1 == 0 ? String.valueOf(num2.intValue()) : decimalFormat.format(num2);
-            history.setText(no1+op+no2);                        
+            history.setText(no1 + op + no2);
 
-            }
-
-
+        }
+        }
 
     }//GEN-LAST:event_jButtoneqActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-                text1.setText(text1.getText()+"7");
+        text1.setText(text1.getText() + "7");
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void text1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text1ActionPerformed
         // TODO add your handling code here:
-            
+
     }//GEN-LAST:event_text1ActionPerformed
 
     private void jButtonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearActionPerformed
@@ -545,185 +539,203 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     private void jButtonDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDelActionPerformed
         // TODO add your handling code here:
-        String s = text1.getText();
-        int len = s.length();
-        String subStr = s.substring(0, len-1);
-        text1.setText(subStr);
+        if (text1.getText().length() != 0) {
+            String s = text1.getText();
+            int len = s.length();
+            String subStr = s.substring(0, len - 1);
+            text1.setText(subStr);
+        }
+
     }//GEN-LAST:event_jButtonDelActionPerformed
 
     private void jButtonMultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMultActionPerformed
         // TODO add your handling code here:
-                num1 = Double.parseDouble(text1.getText());
-        text1.setText("");
-        op="*";
+        if (text1.getText().isBlank() == false) {
+            num1 = Double.valueOf(text1.getText());
+            if (num1.equals(null) == false) {
+                text1.setText("");
+                op = "*";
+            }
+        }
+
     }//GEN-LAST:event_jButtonMultActionPerformed
 
     private void jButton0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton0ActionPerformed
         // TODO add your handling code here:
-        text1.setText(text1.getText()+"0");
+        text1.setText(text1.getText() + "0");
     }//GEN-LAST:event_jButton0ActionPerformed
 
     private void jButtonDotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDotActionPerformed
         // TODO add your handling code here:
-        if(text1.getText().contains(".")){
-            
-        }else{
-                text1.setText(text1.getText()+".");
+        if (text1.getText().contains(".")) {
+
+        } else {
+            text1.setText(text1.getText() + ".");
         }
 
     }//GEN-LAST:event_jButtonDotActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-                text1.setText(text1.getText()+"4");
+        text1.setText(text1.getText() + "4");
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-                text1.setText(text1.getText()+"5");
+        text1.setText(text1.getText() + "5");
 
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-                text1.setText(text1.getText()+"6");
+        text1.setText(text1.getText() + "6");
 
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButtonMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMinActionPerformed
         // TODO add your handling code here:
-        num1 = Double.parseDouble(text1.getText());
-        text1.setText("");
-        op="-";
+        if (text1.getText().isBlank() == false) {
+            num1 = Double.valueOf(text1.getText());
+            if (num1 != null) {
+                text1.setText("");
+                op = "-";
+            }
+        }
+
     }//GEN-LAST:event_jButtonMinActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-                text1.setText(text1.getText()+"9");
+        text1.setText(text1.getText() + "9");
 
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-                text1.setText(text1.getText()+"1");
+        text1.setText(text1.getText() + "1");
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-                        text1.setText(text1.getText()+"3");
+        text1.setText(text1.getText() + "3");
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-                        text1.setText(text1.getText()+"2");
+        text1.setText(text1.getText() + "2");
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButtonDivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDivActionPerformed
         // TODO add your handling code here:
-        num1 = Double.parseDouble(text1.getText());
-        text1.setText("");
-        op="/";
+        if (text1.getText().isBlank() == false) {
+            num1 = Double.valueOf(text1.getText());
+            if (num1 != null) {
+                text1.setText("");
+                op = "/";
+            }
+        }
     }//GEN-LAST:event_jButtonDivActionPerformed
 
     private void jButtonPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPlusActionPerformed
         // TODO add your handling code here:
-        num1 = Double.parseDouble(text1.getText());
-        text1.setText("");
-        op="+";
+        if (text1.getText().isBlank() == false) {
+            num1 = Double.valueOf(text1.getText());
+            if (num1 != null) {
+                text1.setText("");
+                op = "+";
+            }
+        }
+
     }//GEN-LAST:event_jButtonPlusActionPerformed
 
     private void jButtonPercentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPercentActionPerformed
         // TODO add your handling code here:
-        num1 = Double.parseDouble(text1.getText());
-        text1.setText("");
-        op="%";
+        if (text1.getText().isBlank() == false) {
+            num1 = Double.valueOf(text1.getText());
+            if (num1 != null) {
+                text1.setText("");
+                op = "%";
+            }
+        }
+
     }//GEN-LAST:event_jButtonPercentActionPerformed
 
     private void historyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historyActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_historyActionPerformed
 
     private void onActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onActionPerformed
         // TODO add your handling code here:
-                on.setEnabled(false);
-                off.setEnabled(true);
-                off.setSelected(false);
-                text1.setEnabled(true);
-                text1.setEditable(true);
-                jButtonClear.setEnabled(true);
-                jButton1.setEnabled(true);
-                jButton2.setEnabled(true);
-                jButton3.setEnabled(true);
-                jButton4.setEnabled(true);
-                jButton5.setEnabled(true);
-                jButton6.setEnabled(true);
-                jButton7.setEnabled(true);
-                jButton8.setEnabled(true);
-                jButton9.setEnabled(true);
-                jButton0.setEnabled(true);
-                jButtonPlus.setEnabled(true);
-                jButtonMin.setEnabled(true);
-                jButtonDiv.setEnabled(true);
-                jButtonMult.setEnabled(true);
-                jButtonDel.setEnabled(true);
-                jButtonPercent.setEnabled(true);
-                jButtonDot.setEnabled(true);
-                jButtoneq.setEnabled(true);
-                jLabel3.setEnabled(true);
-                history.setEnabled(true);
+        on.setEnabled(false);
+        off.setEnabled(true);
+        off.setSelected(false);
+        text1.setEnabled(true);
+        text1.setEditable(true);
+        jButtonClear.setEnabled(true);
+        jButton1.setEnabled(true);
+        jButton2.setEnabled(true);
+        jButton3.setEnabled(true);
+        jButton4.setEnabled(true);
+        jButton5.setEnabled(true);
+        jButton6.setEnabled(true);
+        jButton7.setEnabled(true);
+        jButton8.setEnabled(true);
+        jButton9.setEnabled(true);
+        jButton0.setEnabled(true);
+        jButtonPlus.setEnabled(true);
+        jButtonMin.setEnabled(true);
+        jButtonDiv.setEnabled(true);
+        jButtonMult.setEnabled(true);
+        jButtonDel.setEnabled(true);
+        jButtonPercent.setEnabled(true);
+        jButtonDot.setEnabled(true);
+        jButtoneq.setEnabled(true);
+        jLabel3.setEnabled(true);
+        history.setEnabled(true);
 
-                t.start();
-
-
-
+        t.start();
 
 
     }//GEN-LAST:event_onActionPerformed
 
     private void offActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_offActionPerformed
         // TODO add your handling code here:
-                off.setEnabled(false);
-                on.setEnabled(true);
-                on.setSelected(false);
-                text1.setEnabled(false);
-                text1.setEditable(false);
-                jButtonClear.setEnabled(false);
-                jButton1.setEnabled(false);
-                jButton2.setEnabled(false);
-                jButton3.setEnabled(false);
-                jButton4.setEnabled(false);
-                jButton5.setEnabled(false);
-                jButton6.setEnabled(false);
-                jButton7.setEnabled(false);
-                jButton8.setEnabled(false);
-                jButton9.setEnabled(false);
-                jButton0.setEnabled(false);
-                jButtonPlus.setEnabled(false);
-                jButtonMin.setEnabled(false);
-                jButtonDiv.setEnabled(false);
-                jButtonMult.setEnabled(false);
-                jButtonDel.setEnabled(false);
-                jButtonPercent.setEnabled(false);
-                jButtonDot.setEnabled(false);
-                jButtoneq.setEnabled(false);
-                history.setText("");
-                history.setEnabled(false);
-                text1.setText("");
-                jLabel3.setEnabled(false);
-                timeLabel.setText("");
-                t.stop();
-                
-               
+        off.setEnabled(false);
+        on.setEnabled(true);
+        on.setSelected(false);
+        text1.setEnabled(false);
+        text1.setEditable(false);
+        jButtonClear.setEnabled(false);
+        jButton1.setEnabled(false);
+        jButton2.setEnabled(false);
+        jButton3.setEnabled(false);
+        jButton4.setEnabled(false);
+        jButton5.setEnabled(false);
+        jButton6.setEnabled(false);
+        jButton7.setEnabled(false);
+        jButton8.setEnabled(false);
+        jButton9.setEnabled(false);
+        jButton0.setEnabled(false);
+        jButtonPlus.setEnabled(false);
+        jButtonMin.setEnabled(false);
+        jButtonDiv.setEnabled(false);
+        jButtonMult.setEnabled(false);
+        jButtonDel.setEnabled(false);
+        jButtonPercent.setEnabled(false);
+        jButtonDot.setEnabled(false);
+        jButtoneq.setEnabled(false);
+        history.setText("");
+        history.setEnabled(false);
+        text1.setText("");
+        jLabel3.setEnabled(false);
+        timeLabel.setText("");
+        t.stop();
 
-
-
-
-                
 
     }//GEN-LAST:event_offActionPerformed
 
@@ -755,17 +767,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new CalculatorGUI().setVisible(true);
-                } catch (FontFormatException ex) {
-                    Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IOException ex) {
-                    Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
+        java.awt.EventQueue.invokeLater(new RunnableImpl());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -798,11 +800,24 @@ public class CalculatorGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JRadioButton off;
     private javax.swing.JRadioButton on;
     private javax.swing.JTextField text1;
     private javax.swing.JLabel timeLabel;
     // End of variables declaration//GEN-END:variables
+
+    private static class RunnableImpl implements Runnable {
+
+        public RunnableImpl() {
+        }
+
+        @Override
+        public void run() {
+            try {
+                new CalculatorGUI().setVisible(true);
+            } catch (FontFormatException | IOException ex) {
+                Logger.getLogger(CalculatorGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 }
